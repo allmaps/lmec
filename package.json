@@ -1,0 +1,24 @@
+{
+  "name": "lmec",
+  "version": "1.0.0",
+  "author": {
+    "name": "Bert Spaan",
+    "email": "hello@bertspaan.nl",
+    "url": "https://bertspaan.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/allmaps/lmec.git"
+  },
+  "homepage": "https://allmaps.org",
+  "description": "Tools and data for the Leventhal Map & Education Center",
+  "main": "index.js",
+  "scripts": {
+  },
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "csv-parse": "^4.15.0",
+    "highland": "^2.13.5"
+  }
+}
