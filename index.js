@@ -6,8 +6,10 @@ const H = require('highland')
 const axios = require('axios')
 const parse = require('csv-parse')
 
-const annotationParser = require('@allmaps/annotation')
+// TODO: move to @allmaps/iiif
 const iiif = require('./iiif')
+const transform = require('@allmaps/transform')
+const annotationParser = require('@allmaps/annotation')
 
 function createCsvStream (inputStream) {
   const parser = parse({
@@ -48,17 +50,40 @@ async function readGcps (row) {
     }))
 
     return {
-      imageServiceId,
-      imageDimensions,
-      gcps,
-      pixelMask: undefined
+      ...row,
+      map: {
+        imageServiceId,
+        imageDimensions,
+        gcps
+      }
     }
   }
 }
 
+const boundary = JSON.parse(fs.readFileSync(path.join(__dirname, 'source', 'boundary.geojson')))
+const polygonsByPlateId = boundary.features.reduce((byId, feature) => ({
+  ...byId,
+  [feature.properties.identifier]: feature.geometry
+}), {})
+
 createCsvStream(process.stdin)
   .flatMap((row) => H(readGcps(row)))
   .compact()
+  .map((row) => {
+    const plateId = row.plate_ID
+    const polygon = polygonsByPlateId[plateId]
+    const points = polygon.coordinates[0]
+
+    const transformArgs = transform.createTransformer(row.map.gcps)
+
+    const pixelMask = points
+      .map((point) => transform.toImage(transformArgs, point))
+
+    return {
+      ...row.map,
+      pixelMask
+    }
+  })
   .toArray((maps) => {
     const annotation = annotationParser.generate(maps)
     console.log(JSON.stringify(annotation, null, 2))
