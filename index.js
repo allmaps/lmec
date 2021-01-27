@@ -28,7 +28,7 @@ function readCsv (inputStream) {
 
 async function readGcps (row) {
   const plateId = row.plate_ID
-  const gcpsPath = path.join('gcps', `${plateId}.tif.points`)
+  const gcpsPath = path.join(__dirname, 'source', 'gcps', `${plateId}.tif.points`)
 
   if (fs.existsSync(gcpsPath)) {
     const manifestUri = `${row.repo_URI}/manifest.json`

@@ -1,2 +1,2 @@
 annotation:
-	@./index.js < plate_URIs.csv > annotation.json
+	@./index.js < ./source/plate_URIs.csv > annotation.json
