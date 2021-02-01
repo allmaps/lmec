@@ -45,7 +45,7 @@ async function readGcps (row) {
     const gcpRows = await readCsv(fs.createReadStream(gcpsPath))
 
     const gcps = gcpRows.map((row) => ({
-      image: [parseFloat(row.pixelX), imageDimensions[1] - parseFloat(row.pixelY)],
+      image: [parseFloat(row.pixelX), -parseFloat(row.pixelY)],
       world: [parseFloat(row.mapX), parseFloat(row.mapY)]
     }))
 
