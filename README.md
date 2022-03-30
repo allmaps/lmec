@@ -19,7 +19,7 @@ Resulting files:
 
 These files can be uploaded to the Allmaps API using the following commands. To run them, first install [HTTPie](https://httpie.io/cli) and [jq](https://stedolan.github.io/jq/).
 
-    jq -s '.' < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/maps
-    jq -s '.' < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/manifests
+    jq -s < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/maps
+    jq -s < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/manifests
 
 _Note: these API calls are currently for internal use only._
