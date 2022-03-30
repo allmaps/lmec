@@ -17,9 +17,9 @@ Resulting files:
 - [`maps.ndjson`](./data/maps.ndjson)
 - [`manifests.ndjson`](./data/manifests.ndjson)
 
-These files can be uploaded to the Allmaps API using the following commands. To run them, first install [HTTPie](https://httpie.io/cli).
+These files can be uploaded to the Allmaps API using the following commands. To run them, first install [HTTPie](https://httpie.io/cli) and [jq](https://stedolan.github.io/jq/).
 
-    http POST http://dev.api.allmaps.org/maps < ./data/maps.ndjson
-    http POST http://dev.api.allmaps.org/manifests < ./data/manifests.ndjson
+    jq -s '.' < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/maps
+    jq -s '.' < ./data/manifests.ndjson | http POST http://dev.api.allmaps.org/manifests
 
 _Note: these API calls are currently for internal use only._
