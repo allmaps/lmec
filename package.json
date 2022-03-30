@@ -1,24 +1,18 @@
 {
   "name": "lmec",
   "version": "1.0.0",
-  "author": {
-    "name": "Bert Spaan",
-    "email": "hello@bertspaan.nl",
-    "url": "https://bertspaan.nl"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/allmaps/lmec.git"
-  },
-  "homepage": "https://allmaps.org",
-  "description": "Tools and data for the Leventhal Map & Education Center",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "gcps": "./src/gcps.js > ./data/maps.ndjson",
+    "manifests": "./src/manifests.js > ./data/manifests.ndjson",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "GPL-3.0-or-later",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
-    "csv-parse": "^4.15.0",
-    "highland": "^2.13.5"
+    "@allmaps/iiif-parser": "^1.0.0-alpha.16",
+    "node-fetch": "^3.2.3"
   }
 }
